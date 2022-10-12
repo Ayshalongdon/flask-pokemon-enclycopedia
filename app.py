@@ -3,37 +3,26 @@ from flask import Flask
 
 app = Flask(__name__)
 
+pokemon_creatures = {
+    "bulbasaur": "dinosaur",
+    "charmander": "reptile",
+    "pikachu": "rabbit",
+    "eevee": "fox",
+    "diglett": "mole",
+}
+
+
+
 
 @app.get("/")
 def pokemon_list():
-    return "Charmander, Pikachu, Eevee, Bulbasaur, Diglett"
+    return "Charmander, pikachu, eevee, bulbasaur, diglett"
 
 
-@app.get("/cgiharmander")
-def charmander_data():
-    return "This is Charmander, a generation 1 pokemon who's main element is fire!"
-
-
-@app.get("/bulbasaur")
-def bulbasaur_data():
-    return "This is Bulbasaur, a generation 1 pokemon who's looks like a little dinsoaur!"
-
-
-@app.get("/pikachu")
-def pikachu_data():
-    return "This is Pikachu, a generation 1 pokemon who's looks like a little rabbit!"
-
-
-@app.get("/eevee")
-def eevee_data():
-    return "This is Eevee, a generation 1 pokemon who's looks like a little fox!"
-
-
-@app.get("/diglett")
-def diglett_data():
-    return "This is Diglett, a generation 1 pokemon who's looks like a little mole!"
-
-
+@app.get("/<pokemon_name>")
+def pokemon_data(pokemon_name):
+    creature = pokemon_creatures.get(pokemon_name)
+    return f"This is {pokemon_name}, a generation 1 pokemon who looks like a tiny {creature}!"
 
 
 if __name__ == "__main__":
